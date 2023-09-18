@@ -14,7 +14,7 @@ function tar() {
     // console.log(target);
     target = Math.floor(Math.random() * range())
     return target;
-  } else console.log(target);
+  } else //console.log(target);
   return target;
 }
 
