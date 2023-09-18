@@ -46,8 +46,8 @@ function match(guess) {
         console.log('You guess right but not smartly');
     }
     else if (guess >target){
-        console.log('number is smaller');
-    }else console.log('number is greater')
+        console.log('number is smaller than ', guess);
+    }else console.log('number is greater ',guess)
   }
 }
 
