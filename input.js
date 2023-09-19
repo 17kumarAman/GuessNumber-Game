@@ -1,55 +1,50 @@
 const prompt = require("prompt-sync")();
 
-// #1 To set Range
-function range() {
-  let range = parseInt(prompt("Enter the range :"));
-  return range;
+// #1 To take input as number
+function inputNumber(Number) {
+  return parseInt(prompt(Number));
 }
 
 
-// #2 To set Target 
-function tar() {
-  let target = Math.floor(Math.random() * range());
-  if (target === 0) {
-    // console.log(target);
-    target = Math.floor(Math.random() * range())
-    return target;
-  } else //console.log(target);
-  return target;
+// #2 To set secretNumber
+function secretNumber(value) {
+  return Math.floor(Math.random() * (value - 1) + 1);
 }
-
 
 // #3 To define SmartGuess
 function smartGuess(range) {
-  let i = 1,
-    localRange = 2;
-  while (localRange < range) {
-    i += 1;
-    localRange = 2 ** i;
-  }
-  // i+=1;
-  return i + 2;
+  return Math.floor(Math.log2(range) + 2);
 }
-//  #4 Main function 
-function match(guess) {
-  const target = tar();
-//   console.log(target);
-  let count = 1;
-  const smart = smartGuess(target);
-  console.log(`if You want to guess smartly the guess in ${smart} chances`);
-  while (target != guess ) {
-    count += 1
-    guess = parseInt(prompt("enter the number"))
-    if(guess ==  target && count <smart){
-        console.log('You guess smartly');
-    }else if(guess ==  target && count>smart){
-        console.log('You guess right but not smartly');
+
+
+//  #4 Main function
+function guessGame(guess, secretNum, smart) {
+  let count = 0;
+  console.log(`if You want to guess smartly then guess in ${smart} chances`);
+  while (secretNum != guess) {
+    count += 1;
+    guess = inputNumber("Enter the number: ");
+    if (guess == secretNum && count <= smart) {
+      console.log("You guess smartly");
+    } else if (guess == secretNum && count > smart) {
+      console.log("You guess right but not smartly");
+    } else if (guess > secretNum) {
+      console.log(`Number is smaller than  ${guess}`);
+    } else console.log(`Number is greater than  ${guess}`);
+    if (count == smart + 5 && secretNum != guess) {
+      console.log("You Loose the Game");
+      break;
     }
-    else if (guess >target){
-        console.log('number is smaller than ', guess);
-    }else console.log('number is greater ',guess)
   }
 }
 
-match();
- // guess = parseInt(prompt("enter the number"));
+
+//  To Intregate the function of guessGame and final step
+function checkGuess() {
+  let guess = inputNumber("Enter the number: ");
+  let secretNum = secretNumber(guess);
+  let smart = smartGuess(guess);
+  guessGame(guess, secretNum, smart);
+}
+
+checkGuess();
