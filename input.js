@@ -39,7 +39,7 @@ function guessGame(guess, secretNum, smart) {
 }
 
 
-//  To Intregate the function of guessGame and final step
+//  #5 To Intregate the function of guessGame and final step
 function checkGuess() {
   let guess = inputNumber("Enter the number: ");
   let secretNum = secretNumber(guess);
